@@ -10,6 +10,7 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import com.snapy.app.features.SnapyApp
 import com.snapy.app.ui.theme.SnapyTheme
 
 class MainActivity : ComponentActivity() {
@@ -17,13 +18,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             SnapyTheme {
-                // A surface container using the 'background' color from the theme
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colors.background
-                ) {
-                    Greeting("Android")
-                }
+                SnapyApp()
             }
         }
     }
@@ -38,6 +33,6 @@ fun Greeting(name: String) {
 @Composable
 fun DefaultPreview() {
     SnapyTheme {
-        Greeting("Android")
+        SnapyApp()
     }
 }
