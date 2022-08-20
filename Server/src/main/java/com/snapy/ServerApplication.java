@@ -1,4 +1,4 @@
-package com.snapy.server;
+package com.snapy;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
