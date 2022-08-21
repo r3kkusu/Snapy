@@ -9,6 +9,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 
 import com.snapy.model.User;
 import com.snapy.service.AuthService;
@@ -25,13 +28,20 @@ public class AuthController {
     }
 
     @RequestMapping(path = "/add", method = RequestMethod.POST)
-    public void register(@RequestBody User user) {
-        authService.register(user);
+    public @ResponseBody ResponseEntity<String> register(@RequestBody User user) {
+        if (authService.register(user)) {
+            return ResponseEntity.ok("SUCCESS");
+        }
+
+        return ResponseEntity.ok("FAILED");
     }
 
     @GetMapping(path = "/all")
-    public List<User> getAll() {
-        return authService.getAll();
+    public @ResponseBody ResponseEntity<List<User>> getAll() {
+        
+        List<User> users = authService.getAll();
+
+        return ResponseEntity.ok(users);
     }
     
 }

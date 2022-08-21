@@ -21,7 +21,6 @@ public class AuthService {
     public Boolean register(User user) {
 
         if (userRespository.find(user.getEmail(), user.getUsername()).size() > 0) {
-            System.out.println("Already exist");
             return false;
         }
 
