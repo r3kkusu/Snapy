@@ -5,7 +5,6 @@ import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.LinearEasing
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.slideInHorizontally
-import androidx.compose.animation.slideOutHorizontally
 import androidx.compose.animation.slideOutVertically
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -24,14 +23,24 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.snapy.app.R
 import com.snapy.app.features.auth.Screens
+
+private const val TAG = "SpringView"
 
 @Composable
 fun SingInView(
     screen: Screens,
-    action: (screen: Screens) -> Unit
+    action: (screen: Screens) -> Unit,
+    viewModel: SignInViewModel = hiltViewModel()
 ) {
+    val state = viewModel.state
+
+    if (state.result == "SUCCESS") {
+        Log.d(TAG, "SingInView: ${state.result}")
+    }
+
     AnimatedVisibility(
         screen == Screens.SIGN_IN,
         modifier = Modifier.fillMaxSize(),
@@ -78,7 +87,7 @@ fun SingInView(
 
                 Button(
                     modifier = Modifier.width(150.dp),
-                    onClick = { /*TODO*/ },
+                    onClick = { viewModel.onEvent(SignInEvents.SignIn(username, password)) },
                     shape = RoundedCornerShape(30.dp)
                 ) {
                     Text(

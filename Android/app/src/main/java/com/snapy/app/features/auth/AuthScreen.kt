@@ -24,9 +24,9 @@ fun AuthScreen() {
         screen = it
     }
 
-    SingInView(screen) {
+    SingInView(screen, action = {
         screen = it
-    }
+    })
 
     SingUpView(screen) {
         screen = it
